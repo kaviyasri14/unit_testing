@@ -1,0 +1,66 @@
+<h1 id="header">Employee ID Card Form</h1>
+<form  class="container" [formGroup]="idform" (ngSubmit)="onSubmit()" novalidate >
+    <div id="iddiv">
+        <label for="firstname" id="lfname">First Name</label>
+        <input type="text" class="form-control" 
+        formControlName="firstname"
+        name="firstname" id="firstname">
+        <i class="glyphicon glyphicon-remove form-control-feedback wrong" id="firstError"></i>
+        <i class="glyphicon glyphicon-ok form-control-feedback tick" id="firstError"></i>           
+    </div>
+    
+    <div *ngIf="firstname.touched && firstname.invalid" id="firstNameError" 
+      class="spanHide alert alert-danger">
+      first should not be null
+    </div>
+    <!-- <br><br> -->
+    <div id="iddiv">
+        <label for="fullname">Full Name</label>
+        <input type="text" class="form-control"  name="fullname" 
+        formControlName="fullname"
+        id="fullname">
+        <i class="glyphicon glyphicon-remove form-control-feedback fullwrong" ></i>
+        <i class="glyphicon glyphicon-ok form-control-feedback fulltick "></i> 
+    </div>
+    <div id="fullNameError"
+    *ngIf="fullname.touched && fullname.invalid"
+    class="spanHide alert alert-danger">fullname should not be null</div>
+    <!-- <br><br> -->
+    <div>
+    <label for="desination">Designation</label>
+        <select name="designation" class="form-control" id="designation"
+         formControlName="designation">
+            <option value=""></option>
+            <option value="Associate Engineer">Associate Engineer</option>
+            <option value="General Manger">General Manger</option>
+            <option value="HR manager">HR manager</option>
+            <option value="Team Leader">Team Leader</option>
+        </select>
+    </div>
+    <div id="designationerror" class="spanHide alert alert-danger"
+    *ngIf="designation.touched && designation.invalid">
+      select corresponding designation
+    </div>
+    
+    <div id="iddiv">
+        <label for="email">email(virtusa)</label>
+        <input type="text" class="form-control" id="email" formControlName="email"> 
+        <i class="glyphicon glyphicon-remove form-control-feedback emailwrong" ></i>
+        <i class="glyphicon glyphicon-ok form-control-feedback emailtick "></i> 
+    </div>
+    <div id="emailerror" *ngIf="email.touched && email.invalid"  class="spanHide">
+      <div class="alert alert-danger" *ngIf="email.errors.required">
+        email id should not be null
+      </div>
+      <div class="alert alert-danger" *ngIf="email.errors.pattern">
+          email id should be a virtusa id
+        </div>
+    </div>
+    <div class="col-sm-7 align-left">
+        <input type="checkbox" id="mob_Q1" value="Q1" />
+        <label for="mob_Q1">Express</label>
+    </div>
+    
+       <button type ="submit" [disabled]=!idform.valid class="btn-btn-success" >Save</button>
+      <button type="button" class="btn btn-success" id="submitting" [disabled]="idform.invalid" onClick="formSubmit()">submit</button>       
+</form>
